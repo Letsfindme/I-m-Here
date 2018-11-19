@@ -32,7 +32,7 @@ public class RegisterController {
             user.setPassword(password);
             user.setPassword("root");
             //problem
-            user.setCreatedDate(Date.valueOf(""));
+            user.setCreatedDate(LocalDateTime.now());
             userRepository.save(user);
 
             return new RedirectView(contextPath + "/login");
