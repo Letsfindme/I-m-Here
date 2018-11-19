@@ -40,13 +40,11 @@ public class UserController {
     @PostMapping("/user/add")
     User addUser(@RequestBody User user){
 
-        /*
-
         LocalDateTime today = LocalDateTime.now();
 
         // Mise à jour du lien avec la date
         user.setCreatedDate(today);
-*/
+
 
         return userRepository.save(user);
     }
