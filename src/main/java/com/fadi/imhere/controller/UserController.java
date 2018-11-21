@@ -25,6 +25,7 @@ public class UserController {
 
     @GetMapping("/user")
     public List<User> displayRegister() {
+
         return userRepository.findAll();
     }
 
