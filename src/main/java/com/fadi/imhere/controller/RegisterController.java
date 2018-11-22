@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -20,6 +19,8 @@ public class RegisterController {
     @Autowired
     private UserRepository userRepository;
 
+
+    private PasswordEncoder passwordEncoder;
 
 
     @PostMapping
