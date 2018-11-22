@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping
 public class UserController {
