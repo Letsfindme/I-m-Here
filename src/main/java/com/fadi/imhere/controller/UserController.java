@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@CrossOrigin(origins="http://localhost:4200")
+//@CrossOrigin(origins="http://localhost:8080")
 @RestController
 @RequestMapping
 public class UserController {
@@ -43,7 +43,6 @@ public class UserController {
     User addUser(@RequestBody User user){
 
         LocalDateTime today = LocalDateTime.now();
-
         // Mise à jour du lien avec la date
         user.setCreatedDate(today);
 
