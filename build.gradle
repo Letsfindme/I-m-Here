@@ -32,6 +32,8 @@ dependencies {
     runtime('mysql:mysql-connector-java')
     compileOnly 'org.projectlombok:lombok:1.18.4'
     compile('org.springframework.boot:spring-boot-starter-security')
+    compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
+    compile group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.1'
 
 }
 
