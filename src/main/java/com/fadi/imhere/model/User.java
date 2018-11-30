@@ -20,13 +20,18 @@ public class User {
     private Long id;
 
     @Column(nullable = false, length = 15)
-    private String username;
+    private String name;
+
+    @Column(nullable = false, length = 15)
+    private String lastName;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false, length = 20)
     private  String bio;
+
+    private String email;
 
     private LocalDateTime createdDate;
 
