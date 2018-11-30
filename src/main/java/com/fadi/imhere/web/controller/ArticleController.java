@@ -1,6 +1,5 @@
-package com.fadi.imhere.controller;
+package com.fadi.imhere.web.controller;
 
-import com.fadi.imhere.model.Article;
 import com.fadi.imhere.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
