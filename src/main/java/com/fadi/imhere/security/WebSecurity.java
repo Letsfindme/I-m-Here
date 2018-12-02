@@ -7,10 +7,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class WebSecurity extends WebSecurityConfigurerAdapter {
+public class WebSecurity {
 
 
-
+/*extends WebSecurityConfigurerAdapter
     private final UserService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -27,6 +27,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest().authenticated();
     }
-
+*/
 
 }

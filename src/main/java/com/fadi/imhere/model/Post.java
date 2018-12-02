@@ -1,20 +1,22 @@
 package com.fadi.imhere.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
 @Setter
 @Getter
-
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 @Table(name = "article")
-public class Article {
+public class Post implements Serializable {
 
     @Id
     @GeneratedValue

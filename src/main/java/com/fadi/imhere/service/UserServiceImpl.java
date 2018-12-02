@@ -1,46 +1,96 @@
 package com.fadi.imhere.service;
 
 
+import com.fadi.imhere.dao.UserDao;
 import com.fadi.imhere.model.User;
-import com.fadi.imhere.repository.UserRepository;
-import com.fadi.imhere.web.DtoShared.UserDto;
+import com.fadi.imhere.model.UserDto;
+import com.fadi.imhere.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.Role;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserDetailsService, UserService {
 
 
-    @Qualifier("userRepository")
-    @Autowired
-    private UserRepository userRepository;
+
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private UserDao userDao;
 
     @Autowired
-    private LoginAttemptService loginAttemptService;
+    private BCryptPasswordEncoder bcryptEncoder;
 
-    @Autowired
-    private HttpServletRequest request;
-
-    @Override
-    public User findUserByEmail(String email) {
-        String ip = getClientIP();
-        if (loginAttemptService.isBlocked(ip)) {
-            throw new RuntimeException("blocked");
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.findByUsername(username);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return userRepository.findByEmail(email);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
     }
 
+    private List<SimpleGrantedAuthority> getAuthority() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+    }
+
+    public List<User> findAll() {
+        List<User> list = new ArrayList<>();
+        userDao.findAll().iterator().forEachRemaining(list::add);
+        return list;
+    }
+
+    @Override
+    public void delete(int id) {
+        userDao.deleteById(id);
+    }
+
+    @Override
+    public User findOne(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    @Override
+    public User findById(int id) {
+        Optional<User> optionalUser = userDao.findById(id);
+        return optionalUser.isPresent() ? optionalUser.get() : null;
+    }
+
+    @Override
+    public UserDto update(UserDto userDto) {
+        User user = findById(userDto.getId());
+        if(user != null) {
+            BeanUtils.copyProperties(userDto, user, "password");
+            userDao.save(user);
+        }
+        return userDto;
+    }
+
+    @Override
+    public User save(UserDto user) {
+        User newUser = new User();
+        newUser.setUsername(user.getUsername());
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        newUser.setAge(user.getAge());
+        return userDao.save(newUser);
+    }
+
+
+
+
+    /*
     @Override
     public void createUserAccount(UserDto accountDto) {
         final User user = new User();
@@ -49,18 +99,14 @@ public class UserServiceImpl implements UserService {
         user.setEmail(accountDto.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(accountDto.getPassword()));
         user.setBio(accountDto.getBio());
-        /*user.setActive(1);
+        user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));*/
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
-    }
 
-    private String getClientIP() {
-        String xfHeader = request.getHeader("X-Forwarded-For");
-        if (xfHeader == null) {
-            return request.getRemoteAddr();
-        }
-        return xfHeader.split(",")[0];
     }
-
+    */
 }
+
+
+

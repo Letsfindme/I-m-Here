@@ -1,28 +1,24 @@
-package com.fadi.imhere.web.DtoShared;
+package com.fadi.imhere.model;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Setter
 @Getter
 @ToString
 
-public class UserDto implements Serializable {
+public class UserDto {
 
 
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
     @NotNull
     @Column(nullable = false, length = 15)
@@ -31,9 +27,13 @@ public class UserDto implements Serializable {
     @Column(nullable = false, length = 15)
     private String lastName;
 
+    private String username;
+
     @NotNull
     @Column(nullable = false)
     private String password;
+
+    private int age;
 
     @Column(nullable = false, length = 20)
     private  String bio;

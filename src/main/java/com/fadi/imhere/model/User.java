@@ -2,6 +2,7 @@ package com.fadi.imhere.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.util.Date;
 
 @Setter
 @Getter
-
+@ToString
 @Entity
 @Table(name = "user")
 public class User {
@@ -20,10 +21,13 @@ public class User {
     private Long id;
 
     @Column(nullable = false, length = 15)
-    private String name;
+    private String firstName;
 
     @Column(nullable = false, length = 15)
     private String lastName;
+
+    @Column
+    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -34,6 +38,9 @@ public class User {
     private String email;
 
     private LocalDateTime createdDate;
+
+    @Column
+    private int age;
 
 
 }

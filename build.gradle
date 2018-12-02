@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.7.RELEASE'
+        springBootVersion = '2.0.1.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -32,8 +32,12 @@ dependencies {
     runtime('mysql:mysql-connector-java')
     compileOnly 'org.projectlombok:lombok:1.18.4'
     compile('org.springframework.boot:spring-boot-starter-security')
-    compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
-    compile group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.1'
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.0.0.RELEASE'
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+
 
 }
 
