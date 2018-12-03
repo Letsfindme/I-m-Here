@@ -1,11 +1,47 @@
 package com.fadi.imhere.repository;
 
-import com.fadi.imhere.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Long> {
-   // User getUserByUsername(String username);
-    User findByEmail(String email);
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+@Setter
+@Getter
+@ToString
+
+public class UserRepository {
+
+
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotNull
+    @Column(nullable = false, length = 15)
+    private String firstName;
+
+    @Column(nullable = false, length = 15)
+    private String lastName;
+
+    private String username;
+
+    @NotNull
+    @Column(nullable = false)
+    private String password;
+
+    private int age;
+
+    @Column(nullable = false, length = 20)
+    private  String bio;
+
+    private  String email;
+
+
+
+
+
 }
