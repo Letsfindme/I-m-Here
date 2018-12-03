@@ -3,7 +3,7 @@ package com.fadi.imhere.controller;
 import com.fadi.imhere.model.ApiResponse;
 import com.fadi.imhere.model.User;
 import com.fadi.imhere.service.UserService;
-import com.fadi.imhere.model.UserDto;
+import com.fadi.imhere.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class UserController {
 
 
     @PostMapping
-    public ApiResponse<User> saveUser(@RequestBody UserDto user){
+    public ApiResponse<User> saveUser(@RequestBody UserRepository user){
         return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",userService.save(user));
     }
 
@@ -35,8 +35,8 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<UserDto> update(@RequestBody UserDto userDto) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userDto));
+    public ApiResponse<UserRepository> update(@RequestBody UserRepository userRepository) {
+        return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userRepository));
     }
 
     @DeleteMapping("/{id}")

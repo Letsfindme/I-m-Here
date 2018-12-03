@@ -3,8 +3,8 @@ package com.fadi.imhere.service;
 
 import com.fadi.imhere.dao.UserDao;
 import com.fadi.imhere.model.User;
-import com.fadi.imhere.model.UserDto;
-import com.fadi.imhere.service.UserService;
+import com.fadi.imhere.repository.UserRepository;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,17 +67,17 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public UserDto update(UserDto userDto) {
-        User user = findById(userDto.getId());
+    public UserRepository update(UserRepository userRepository) {
+        User user = findById(userRepository.getId());
         if(user != null) {
-            BeanUtils.copyProperties(userDto, user, "password");
+            BeanUtils.copyProperties(userRepository, user, "password");
             userDao.save(user);
         }
-        return userDto;
+        return userRepository;
     }
 
     @Override
-    public User save(UserDto user) {
+    public User save(UserRepository user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setFirstName(user.getFirstName());
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     /*
     @Override
-    public void createUserAccount(UserDto accountDto) {
+    public void createUserAccount(UserRepository accountDto) {
         final User user = new User();
         user.setName(accountDto.getFirstName());
         user.setLastName(accountDto.getLastName());

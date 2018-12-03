@@ -2,7 +2,7 @@ package com.fadi.imhere.service;
 
 
 import com.fadi.imhere.model.User;
-import com.fadi.imhere.model.UserDto;
+import com.fadi.imhere.repository.UserRepository;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ public interface UserService  {
 
     /*
     User findUserByEmail(String email);
-    void createUserAccount(UserDto user);
-*/
+    void createUserAccount(UserRepository user);
+    */
 
-    User save(UserDto user);
+    User save(UserRepository user);
 
     List<User> findAll();
 
@@ -24,5 +24,5 @@ public interface UserService  {
 
     User findById(int id);
 
-    UserDto update(UserDto userDto);
+    UserRepository update(UserRepository userRepository);
 }
