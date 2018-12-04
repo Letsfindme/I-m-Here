@@ -2,25 +2,25 @@ package com.fadi.imhere.controller;
 
 import com.fadi.imhere.model.ApiResponse;
 import com.fadi.imhere.model.User;
+import com.fadi.imhere.model.UserDTO;
 import com.fadi.imhere.service.UserService;
-import com.fadi.imhere.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-
+    //SignUp
     @PostMapping
-    public ApiResponse<User> saveUser(@RequestBody UserRepository user){
+    public ApiResponse<User> saveUser(@RequestBody UserDTO user){
         return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",userService.save(user));
     }
 
@@ -35,14 +35,19 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<UserRepository> update(@RequestBody UserRepository userRepository) {
-        return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userRepository));
+    public ApiResponse<UserDTO> update(@RequestBody UserDTO userDTO) {
+        return new ApiResponse<>(HttpStatus.OK.value(), "User updated successfully.",userService.update(userDTO));
     }
 
     @DeleteMapping("/{id}")
     public ApiResponse<Void> delete(@PathVariable int id) {
         userService.delete(id);
         return new ApiResponse<>(HttpStatus.OK.value(), "User deleted successfully.", null);
+    }
+
+    @RequestMapping(value="/signup", method = RequestMethod.POST)
+    public User saveUser2(@RequestBody UserDTO user){
+        return userService.save(user);
     }
 
     /*
