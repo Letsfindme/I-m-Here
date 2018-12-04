@@ -18,26 +18,26 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
-    @Column(nullable = false, length = 15)
+    @Column//(nullable = false, length = 15)
     private String firstName;
 
-    @Column(nullable = false, length = 15)
+    @Column//(nullable = false, length = 15)
     private String lastName;
 
     @Column
     private String username;
 
-    @Column(nullable = false)
+    @Column //(nullable = false)
     private String password;
 
-    @Column(nullable = false, length = 20)
+    @Column//(nullable = false, length = 20)
     private  String bio;
 
     private String email;
 
-    private LocalDateTime createdDate;
+    //private LocalDateTime createdDate;
 
     @Column
     private int age;
