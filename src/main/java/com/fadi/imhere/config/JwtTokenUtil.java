@@ -18,6 +18,13 @@ import java.util.function.Function;
 import static com.fadi.imhere.model.Constants.SIGNING_KEY;
 import static  com.fadi.imhere.model.Constants.ACCESS_TOKEN_VALIDITY_SECONDS;
 
+/**
+ *
+ * Following is the util class to generate the auth token as well as to extract username from the token.
+ * Here is the configuration that we want url such as /token/* and /signup/* to be publicly available
+ * and rest of the urls to be restricted from public access.
+ *
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 
@@ -57,7 +64,7 @@ public class JwtTokenUtil implements Serializable {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setIssuer("http://devglan.com")
+                .setIssuer("http://fadi.com")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECONDS*1000))
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
