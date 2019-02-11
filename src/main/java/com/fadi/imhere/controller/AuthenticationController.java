@@ -1,19 +1,15 @@
 package com.fadi.imhere.controller;
-
-
 import com.fadi.imhere.config.JwtTokenUtil;
 import com.fadi.imhere.model.ApiResponse;
-import com.fadi.imhere.model.AuthToken;
-import com.fadi.imhere.model.LoginUser;
+import com.fadi.imhere.security.AuthToken;
+import com.fadi.imhere.dtos.LoginUser;
 import com.fadi.imhere.model.User;
 import com.fadi.imhere.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
