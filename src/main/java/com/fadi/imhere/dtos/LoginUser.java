@@ -1,4 +1,4 @@
-package com.fadi.imhere.model;
+package com.fadi.imhere.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
