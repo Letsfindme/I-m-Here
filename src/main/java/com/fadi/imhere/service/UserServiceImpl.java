@@ -1,9 +1,9 @@
 package com.fadi.imhere.service;
 
 
+import com.fadi.imhere.dtos.UserDto;
 import com.fadi.imhere.repository.UserRepository;
 import com.fadi.imhere.model.User;
-import com.fadi.imhere.model.UserDTO;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public UserDTO update(UserDTO userDTO) {
+    public UserDto update(UserDto userDTO) {
         User user = findById(userDTO.getId());
         if(user != null) {
             BeanUtils.copyProperties(userDTO, user, "password");
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User save(UserDTO user) {
+    public User save(UserDto user) {
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setFirstName(user.getFirstName());
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     /*
     @Override
-    public void createUserAccount(UserDTO accountDto) {
+    public void createUserAccount(UserDto accountDto) {
         final User user = new User();
         user.setName(accountDto.getFirstName());
         user.setLastName(accountDto.getLastName());
