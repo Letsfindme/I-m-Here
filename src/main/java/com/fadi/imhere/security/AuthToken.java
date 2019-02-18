@@ -12,14 +12,8 @@ public class AuthToken {
 
     private String token;
     private String username;
-
-
-
     public AuthToken(String token){
         this.token = token;
     }
-
-
-
 
 }

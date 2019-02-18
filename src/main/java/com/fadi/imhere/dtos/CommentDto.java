@@ -7,26 +7,26 @@ public class CommentDto {
     private static final int HASH_CODE_CONSTANT_1 = 31;
     private static final int HASH_CODE_CONSTANT_2 = 0;
 
-    private UUID id;
-    private UUID articleID;
+    private Long id;
+    private Long articleID;
     private String content;
     private Date lastModified;
     private UserDto user;
     private boolean checked;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public UUID getArticleId() {
+    public Long getArticleId() {
         return articleID;
     }
 
-    public void setArticleId(UUID articleID) {
+    public void setArticleId(Long articleID) {
         this.articleID = articleID;
     }
 

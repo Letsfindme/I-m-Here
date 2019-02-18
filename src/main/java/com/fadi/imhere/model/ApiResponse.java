@@ -1,12 +1,8 @@
 package com.fadi.imhere.model;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
+import lombok.Data;
+@Data
 @AllArgsConstructor
 public class ApiResponse<T> {
 

@@ -28,7 +28,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    compile('org.hibernate:hibernate-java8')
+    //compile('org.hibernate:hibernate-java8')
 
     runtime('mysql:mysql-connector-java')
 
@@ -37,7 +37,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-security')
 
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
-
+    //implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
     //ne function pas
     //compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
 
@@ -46,6 +46,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.mysql.jdbc/com.springsource.com.mysql.jdbc
     //compile group: 'com.mysql.jdbc', name: 'com.springsource.com.mysql.jdbc', version: '5.1.6'
+// https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
 
 
 

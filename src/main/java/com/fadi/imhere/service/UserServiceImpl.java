@@ -5,7 +5,6 @@ import com.fadi.imhere.dtos.UserDto;
 import com.fadi.imhere.repository.UserRepository;
 import com.fadi.imhere.model.User;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,10 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service("userService")
 public class UserServiceImpl implements UserDetailsService, UserService {
@@ -37,7 +33,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         if(user == null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+        return new org.springframework.security.core.userdetails.User(user.getUid(), user.getPassword(), getAuthority());
     }
 
     private List<SimpleGrantedAuthority> getAuthority() {
@@ -52,6 +48,11 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public void delete(int id) {
+
+    }
+
+
+    public void delete(UUID id) {
         userRepository.deleteById(id);
     }
 
@@ -62,11 +63,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public User findById(int id) {
+        return null;
+    }
+
+    public User findById(UUID id) {
         Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser.isPresent() ? optionalUser.get() : null;
     }
 
     @Override
+    public UserDto update(UserDto userDTO) {
+        return null;
+    }
+
+    /*@Override
     public UserDto update(UserDto userDTO) {
         User user = findById(userDTO.getId());
         if(user != null) {
@@ -75,11 +85,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
         return userDTO;
     }
-
+*/
     @Override
     public User save(UserDto user) {
         User newUser = new User();
-        newUser.setUsername(user.getUsername());
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
