@@ -2,15 +2,13 @@ package com.fadi.imhere.model;
 
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 
 @Setter
 @Getter
@@ -23,16 +21,17 @@ import java.util.UUID;
 public class Post implements Serializable {
 
     @Id
-    @Column(name = "id", columnDefinition = "RAW(16)")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @GeneratedValue(generator = "uuid2")
+    @Type(type="uuid-char")
+    @Column(name = "id")
+    @GeneratedValue
     private UUID id;
 
     @Column(name = "title",nullable = false, length = 32)
     private String title;
 
+    @OneToMany
     @Column(name = "content",nullable = false, length = 1024)
-    private String content;
+    private List<PostContent> postContents;
 
     @Column(name = "view_count")
     private int viewCounter;
@@ -48,10 +47,10 @@ public class Post implements Serializable {
     private User user;
 
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "post_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "post_id")
     private List<PostLike> postLikes;
 
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "related_post", nullable = false, insertable = false, updatable = false)
-    private List<Post> replies;
+    @JoinColumn(name = "comments")
+    private List<Comment> comments;
 }

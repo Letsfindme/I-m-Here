@@ -1,32 +1,35 @@
 package com.fadi.imhere.model;
 
 import com.fadi.imhere.Utils.ObjectUtils;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 @Setter
 @Getter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
     @Id
-    @Column(name = "id", columnDefinition = "RAW(16)")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @GeneratedValue(generator = "uuid2")
+    @Type(type="uuid-char")
+    @Column(name = "id")
+    @GeneratedValue
     private UUID id;
 
     @Column(name = "first_name")
     private String firstName;
+
+    @Column
+    private String username;
 
     @Column(name = "last_name")
     private String lastName;
@@ -62,6 +65,7 @@ public class User {
     @Column(name = "mail")
     private String mail;;
 
+    private String email;;
     //private LocalDateTime createdDate;
 
     @Column(name = "age")

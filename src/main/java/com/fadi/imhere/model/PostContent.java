@@ -1,10 +1,11 @@
 package com.fadi.imhere.model;
+
 import lombok.*;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.UUID;
+
 @Setter
 @Getter
 @ToString
@@ -12,8 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "post_likes")
-public class PostLike {
+@Table(name = "post_contents")
+public class PostContent implements Serializable {
 
     @Id
     @Type(type="uuid-char")
@@ -21,15 +22,18 @@ public class PostLike {
     @GeneratedValue
     private UUID id;
 
-    @Column(name = "\"date\"")
-    private Date date;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "text")
+    private String text;
+
+    @Column(name = "video_url")
+    private String videoMUrl;
 
     @OneToOne
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
 }
