@@ -31,10 +31,11 @@ public class PostService {
         Post post = DtoUtils.convertPostToEntity(postDto);
         UUID userId = postDto.getUser().getId();
         Optional<User> user = userRepository.findById(userId);
-
-        Post PostSaved = postRepository.save(post);
-
-        postToReturn = DtoUtils.convertPostToDto(PostSaved,userId);
+        if (user != null){
+            post.setUser(user.get());
+            Post PostSaved = postRepository.save(post);
+            postToReturn = DtoUtils.convertPostToDto(PostSaved,userId);
+        }
         return postToReturn;
     }
 

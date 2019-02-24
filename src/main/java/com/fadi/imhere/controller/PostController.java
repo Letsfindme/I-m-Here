@@ -17,6 +17,11 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    /**
+     * Get all posts by user
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
     public List<PostDto> findAll(@RequestParam("user-id") UUID userId) {
@@ -29,12 +34,17 @@ public class PostController {
         return postService.getPostById(postId, userId);
     }
 
+    /**
+     * Create a post
+     * @param postDto
+     * @return
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public PostDto createArticle(@RequestBody PostDto postDto) {
+    public PostDto createPost(@RequestBody PostDto postDto) {
         if(postDto.getUser() == null) {
-            throw new InvalidParameterException("The article to create must have an author.");
+            throw new InvalidParameterException("No author");
         }
         return postService.createPost(postDto);
     }
