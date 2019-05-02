@@ -1,28 +1,28 @@
 package com.fadi.imhere.model;
 
 import lombok.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
-@Setter
-@Getter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
+
+
 
 @Entity
-@Table(name = "roles")
-public class Role implements Serializable {
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+public class Role{
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "description")
-    private String description;
+    @Enumerated(EnumType.STRING)
+    @NaturalId
+    @Column(length = 60)
+    private RoleName name;
 
 
 }

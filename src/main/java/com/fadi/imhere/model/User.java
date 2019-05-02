@@ -6,8 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 @Setter
 @Getter
@@ -19,6 +18,14 @@ import java.util.UUID;
 @Table(name = "user")
 public class User implements Serializable {
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    private boolean active;
+
     @Id
     @Type(type="uuid-char")
     @Column(name = "id")
@@ -26,16 +33,13 @@ public class User implements Serializable {
     private UUID id;
 
     @Column(name = "first_name")
-    private String firstName;
+    private String firstname;
 
     @Column
     private String username;
 
     @Column(name = "last_name")
     private String lastName;
-
-    @Column(name = "exp")
-    private int experience;
 
     @Column(name = "first_connection")
     private Date firstConnection;
@@ -45,16 +49,6 @@ public class User implements Serializable {
 
     @Column(name = "avatar")
     private boolean avatar;
-
-    @OneToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-    @Column(name = "tos_date")
-    private Date tosDate;
-
-    @Column(name = "\"uid\"")
-    private String uid;
 
     @Column //(nullable = false)
     private String password;
@@ -71,13 +65,14 @@ public class User implements Serializable {
     @Column(name = "age")
     private int age;
 
-    public Date getTosDate() {
-        return ObjectUtils.cloneDate(tosDate);
+    public User(String firstname, String username, String email, String password) {
+        this.firstname = firstname;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
-    public void setTosDate(Date tosDate) {
-        this.tosDate = ObjectUtils.cloneDate(tosDate);
-    }
+
 
 
 }

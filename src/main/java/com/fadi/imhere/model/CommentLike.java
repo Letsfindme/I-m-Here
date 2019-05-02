@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @ToString
 @AllArgsConstructor
-
+@NoArgsConstructor
 @Entity
 @Table(name = "comment_likes")
 public class CommentLike {
