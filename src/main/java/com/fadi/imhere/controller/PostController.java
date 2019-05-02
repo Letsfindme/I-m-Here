@@ -1,7 +1,7 @@
 package com.fadi.imhere.controller;
 
 import com.fadi.imhere.dtos.PostDto;
-import com.fadi.imhere.service.PostService;
+import com.fadi.imhere.service.PostServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.UUID;
 public class PostController {
 
     @Autowired
-    private PostService postService;
+    private PostServiceImp postService;
 
     /**
      * Get all posts by user
