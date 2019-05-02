@@ -36,6 +36,9 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter-security')
 
+    // https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2'
+
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     //implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
     //ne function pas
@@ -49,8 +52,11 @@ dependencies {
 // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
     compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
 
+// https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.5.RELEASE'
 
-
+// https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+    testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.1.5.RELEASE'
 
 }
 
