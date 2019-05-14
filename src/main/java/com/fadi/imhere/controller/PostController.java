@@ -19,13 +19,12 @@ public class PostController {
 
     /**
      * Get all posts by user
-     * @param userId
      * @return
      */
     @RequestMapping(value = "", method = RequestMethod.GET)
     @ResponseBody
-    public List<PostDto> findAll(@RequestParam("user-id") UUID userId) {
-        return postService.findAll(userId);
+    public List<PostDto> findAll() {
+        return postService.findAll();
     }
 
     @RequestMapping(value = "/{id-post}", method = RequestMethod.GET)
@@ -43,7 +42,7 @@ public class PostController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public PostDto createPost(@RequestBody PostDto postDto) {
-        if(postDto.getUser() == null) {
+        if(postDto.getUsername() == null) {
             throw new InvalidParameterException("No author");
         }
         return postService.createPost(postDto);

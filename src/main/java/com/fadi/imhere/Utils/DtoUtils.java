@@ -45,26 +45,17 @@ public class DtoUtils {
         return user;
     }
 
-    public static PostDto convertPostToDto(Post post, UUID userId) {
+    public static PostDto convertPostToDto(Post post) {
         PostDto postDto = null;
         if(post != null) {
             postDto = getModelMapperInstance().map(post, PostDto.class);
-
             if(post.getUser() != null) {
-                postDto.setUser(convertUserToDto(post.getUser()));
-            }
-            if(userId != null) {
-                postDto.setLiked(
-                        post.getPostLikes() != null
-                                && post.getPostLikes()
-                                .stream()
-                                .anyMatch(al -> al.getUser().getId().equals(userId))
-                );
+                postDto.setUsername(post.getUser().getUsername());
             }
         }
-
         return postDto;
     }
+
     public static Post convertPostToEntity(PostDto postDto) {
         return getModelMapperInstance().map(postDto, Post.class);
     }

@@ -31,7 +31,7 @@ public class Post implements Serializable {
 
     @OneToMany
     @Column(name = "content", length = 1024)
-    private List<PostContent> postContents;
+    private List<PostContent> contents;
 
     @Column(name = "view_count")
     private int viewCounter;

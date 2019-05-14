@@ -1,6 +1,7 @@
 package com.fadi.imhere.service;
 
 import com.fadi.imhere.Utils.DtoUtils;
+import com.fadi.imhere.Utils.ObjectUtils;
 import com.fadi.imhere.dtos.PostDto;
 import com.fadi.imhere.model.Post;
 
@@ -23,29 +24,30 @@ public class PostServiceImp implements PostService {
     @Autowired
     private PostRepository postRepository;
 
+    private DtoUtils dtoUtils;
 
     @Autowired
     private UserRepository userRepository;
 
-   @Transactional
+    @Transactional
     public PostDto createPost(PostDto postDto) {
         PostDto postToReturn = null;
         Post post = DtoUtils.convertPostToEntity(postDto);
-        UUID userId = postDto.getUser().getId();
+        UUID userId = userRepository.findByUsername((postDto.getUsername())).get().getId();
         Optional<User> user = userRepository.findById(userId);
-        if (user != null){
+        if (user != null) {
             post.setUser(user.get());
             Post PostSaved = postRepository.save(post);
-            postToReturn = DtoUtils.convertPostToDto(PostSaved,userId);
+            postToReturn = DtoUtils.convertPostToDto(PostSaved);
         }
         return postToReturn;
     }
 
     @Transactional(readOnly = true)
-    public List<PostDto> findAll(UUID userId) {
+    public List<PostDto> findAll() {
         return DtoUtils.makeList(postRepository.findAll())
                 .stream()
-                .map(p -> DtoUtils.convertPostToDto(p, userId))
+                .map(p -> DtoUtils.convertPostToDto(p))
                 .collect(Collectors.toList());
     }
 

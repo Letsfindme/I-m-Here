@@ -1,14 +1,7 @@
 package com.fadi.imhere.controller;
 
-import com.fadi.imhere.dtos.UserDto;
-import com.fadi.imhere.model.ApiResponse;
-import com.fadi.imhere.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
